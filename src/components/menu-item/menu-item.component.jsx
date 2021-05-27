@@ -1,12 +1,17 @@
 import React from 'react';
 import './menu-item.styles.css'
 
+// higher order component
+import { withRouter } from 'react-router-dom';
+
 //functional component
 
 //react also gives the html components style property and
 // it takes objects that takes values equal to css values
-const MenuItem = ({ title, imageUrl, size }) => (
-    <div className={`${size} menu-item`} >
+
+// now we have access to history becauyse of withRouter superpowering MenuItem component
+const MenuItem = ({ title, imageUrl, size, history, linkUrl, match }) => (
+    <div className={`${size} menu-item`} onClick={() => history.push(`${match.url}${linkUrl}`)}>
     <div style={{
         backgroundImage: `url(${imageUrl})`    
     }} 
@@ -18,4 +23,5 @@ const MenuItem = ({ title, imageUrl, size }) => (
     </div>
 );
 
-export default MenuItem;
+//it will return us superpowered MenuItem component
+export default withRouter(MenuItem);
